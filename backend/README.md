@@ -1,0 +1,13 @@
+# Flask backend
+
+The server uses the python web server package `flask` (http://flask.palletsprojects.com/en/1.1.x/).
+
+## Create entity with POST:
+
+Create a POST request with the following payload:
+```
+{
+	"title":"TypeScript Advanced Exam",
+	"description": "Tricky Qs"
+}
+```
