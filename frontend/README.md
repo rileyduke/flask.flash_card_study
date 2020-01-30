@@ -1,3 +1,3 @@
 # Frontend
 
-angular app lives here
+React app lives here
