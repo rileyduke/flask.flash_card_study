@@ -9,6 +9,7 @@ import { CardListComponent } from './view/card-list/card-list.component';
 import { MatToolbarModule, MatGridListModule } from '@angular/material';
 import { ExamsApiService } from './service/exam/exam-api.service';
 import { HttpClientModule } from '@angular/common/http';
+import { CardTitleComponent } from './view/card-list/card-title/card-title.component';
 
 const appRoutes: Routes = [
   { path: '', component: CardListComponent }
@@ -17,7 +18,8 @@ const appRoutes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    CardListComponent
+    CardListComponent,
+    CardTitleComponent
   ],
   imports: [
     RouterModule.forRoot(
