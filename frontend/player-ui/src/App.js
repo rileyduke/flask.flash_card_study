@@ -3,13 +3,29 @@ import ReactHowler from 'react-howler'
 import { Container, Slider } from '@material-ui/core';
 import raf from 'raf' // requestAnimationFrame polyfill
 
+// buttons
+import Button from '@material-ui/core/Button';
+
+// icons
+import Icon from '@material-ui/core/Icon';
+import DeleteIcon from '@material-ui/icons/Delete';
+import PlayArrowIcon from '@material-ui/icons/PlayArrow';
+import PauseIcon from '@material-ui/icons/Pause'
+
 import './App.css';
+
+function PlayPause(props) {
+  const isPlaying = props.isPlaying;
+  if (!isPlaying) {
+    return <Icon>play_arrow</Icon>;
+  }
+  return <Icon>pause</Icon>;
+}
 
 export default class extends Component {  
   constructor (props) {
-    
     super(props)
-    this.fulltime = 100.0
+    
     this.state = {
       value: 0.0,
       playing: false,
@@ -22,11 +38,17 @@ export default class extends Component {
     this.onChangeHandler = this.onChangeHandler.bind(this)
     this.handleChange = this.handleChange.bind(this)
     this.renderSeekPos = this.renderSeekPos.bind(this)
+    this.handleToggle = this.handleToggle.bind(this)
   }  
   handleOnLoad () {
     this.setState({
       loaded: true,
       duration: this.player.duration()
+    })
+  }
+  handleToggle () {
+    this.setState({
+      playing: this.state.playing ? false : true
     })
   }
   handlePlay () {
@@ -79,33 +101,32 @@ export default class extends Component {
   render() { 
     return(
     <div className="App">
-      <Container maxWidth="xs">
-        test
-        <Slider
-          value={(this.state.seek !== undefined) ? this.state.seek.toFixed(2) : '0.00'}
-          onChange={this.handleChange}
-          aria-labelledby="range-slider"
-          getAriaValueText={this.valuetext}
-        />
-        <div id="current-timestamp">
-          {(this.state.seek !== undefined) ? this.state.seek.toFixed(2) : '0:00'} / {(this.state.duration) ? this.state.duration.toFixed(2) : 'NaN'}
-        </div>
-        <div id="transcribed">
-          bla <span className="highlighted">bla</span> bla
-        </div>
-      </Container>
+      
       <header className="App-header">
+        <Container maxWidth="xs">
+          <Slider
+            value={(this.state.seek !== undefined) ? this.state.seek.toFixed(2) : '0.00'}
+            onChange={this.handleChange}
+            aria-labelledby="range-slider"
+            getAriaValueText={this.valuetext}
+          />
+          <div id="current-timestamp">
+            {(this.state.seek !== undefined) ? this.state.seek.toFixed(2) : '0:00'} / {(this.state.duration) ? this.state.duration.toFixed(2) : 'NaN'}
+          </div>
+          <div id="control-buttons">
+            <Button variant="contained" color="secondary" onClick={this.handleToggle}><PlayPause isPlaying={this.state.playing}></PlayPause></Button>
+          </div>
+        </Container>
         <input type="file" name="file" onChange={this.onChangeHandler}/>
         <ReactHowler
           volume='0.1'
           onLoad={this.handleOnLoad}
+          onPlay={this.handlePlay}
           src={this.state.audiosrc}
           playing={this.state.playing}
           format='mp3'
           ref={(ref) => (this.player = ref)}
         />
-        <button onClick={this.handlePlay}>Play</button>
-        <button onClick={this.handlePause}>Pause</button>
       </header>
     </div>
   )}
