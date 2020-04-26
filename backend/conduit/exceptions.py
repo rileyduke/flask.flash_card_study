@@ -39,9 +39,5 @@ class InvalidUsage(Exception):
         return cls(**UNKNOWN_ERROR)
 
     @classmethod
-    def article_not_found(cls):
-        return cls(**ARTICLE_NOT_FOUND)
-
-    @classmethod
     def comment_not_owned(cls):
         return cls(**COMMENT_NOT_OWNED)
