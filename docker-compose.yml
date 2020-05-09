@@ -1,8 +1,8 @@
 version: '3'
 
 services:
-    flasher-dev-ubuntu:
-        build: ./docker-image-python
+    backend:
+        build: ./backend/docker-image-python
         ports:
             - 8000:8000
             - 4000:4000
@@ -14,13 +14,19 @@ services:
             - FLASK_APP=/home/backend/autoapp.py
             - FLASK_DEBUG=1
         volumes:
-            - .:/home/backend/
+            - ./backend:/home/backend/
         tty: true
-    flasher-db:
+    database:
         image: postgres
         restart: always
         ports: 
             - 5555:5432
         environment:
             POSTGRES_PASSWORD: test
-
+    frontend:
+        image: node:14.2.0-alpine3.10
+        volumes:
+            - ./frontend:/home/frontend
+        ports:
+            - 3000:3000
+        tty: true
