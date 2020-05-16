@@ -42,8 +42,7 @@ class ProdConfig(Config):
 class DevConfig(Config):
     """Development configuration."""
     ENV = 'dev'
-    HOST = '0.0.0.0'
     DEBUG = True
-    DB_NAME = 'dev.flasher'
+    DB_NAME = 'flasher'
     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL',
-                                             'postgresql://postgres:test@database:5432/flasher')
+                                             'postgresql://postgres:test@database:5432')

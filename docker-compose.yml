@@ -4,10 +4,6 @@ services:
     backend:
         build: ./backend/docker-image-python
         ports:
-            - 8000:8000
-            - 4000:4000
-            - 4100:4100
-            - 4200:4200
             - 5000:5000
         environment:
             - CONDUIT_SECRET=test

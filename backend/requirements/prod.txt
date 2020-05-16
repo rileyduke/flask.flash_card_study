@@ -1,9 +1,9 @@
 # Everything needed in production
 
 Werkzeug
-SQLAlchemy==1.1.9
+SQLAlchemy
 Flask_Caching
-Flask_SQLAlchemy==2.2
+Flask_SQLAlchemy
 click
 marshmallow
 Flask_Bcrypt
